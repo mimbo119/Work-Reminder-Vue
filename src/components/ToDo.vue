@@ -15,10 +15,8 @@
                 </v-toolbar-title>
             </v-flex>
         </v-layout>
-        <div v-for="todo in todos" :key="todo.id" class="todo-items">
-            <div class="items">{{todo.title}}</div>
-            <div class="remove-items" @click="remove(index)"> &times;</div>
-        </div>
+        <to-do-item v-for="(todo , index) in todos" :key="todo.id" :todo="todo" :index="index" @removedTodo="removed">            
+        </to-do-item>
     </v-container>
 </template>
 
@@ -35,28 +33,28 @@
         data() {
             return {
                 newTodo: '',
-                todos: []
+                todos: [{
+                    'id' : 1,
+                    'title': 'Hello'
+                }]
             }
         },
 
         methods: {
 
             add() {
-
                 if (this.newTodo.trim().length == 0) {
                     return
                 }
                 this.todos.push({
                     id: this.idTodo,
                     title: this.newTodo
-
                 })
-
                 this.newTodo = '',
-                    this.idTodo++
+                this.idTodo++
             },
 
-            remove(index){
+            removed(index){
                 this.todos.splice(index, 1)
             }
 

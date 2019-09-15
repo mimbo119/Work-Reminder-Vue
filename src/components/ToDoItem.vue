@@ -2,12 +2,10 @@
     <v-container>
         <v-layout text-center wrap>
             <v-flex>
-                <v-toolbar-title class="headline text-uppercase">
-                    <span>Todos</span>
-                </v-toolbar-title>
+                    <span>...............</span>
             </v-flex>
         </v-layout>
-        <div v-for="todo in todos" :key="todo.id" class="todo-items">
+        <div class="todo-items">
             <div class="items">{{todo.title}}</div>
             <div class="remove-items" @click="remove(index)"> &times;</div>
         </div>
@@ -16,7 +14,31 @@
 
 <script>
     export default {
-        name: 'todo-item',
+        name: 'to-do-item',
+        props:{
+            todo:{
+                type: Object,
+                required: true,
+            },
+            index:{
+                type:Number,
+                required: true,
+            }
+        },
+
+        data(){
+            return{
+                'id': this.todo.id,
+                'title': this.todo.title
+            }
+        },
+
+        methods:{
+            remove(index){
+                this.$emit('removedTodo', index)
+            }
+        }
+
     }
 </script>
 
